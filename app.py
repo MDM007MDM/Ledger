@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
@@ -71,9 +70,7 @@ def dashboard():
         return redirect(url_for('login'))
     user = User.query.get(session['user_id'])
     transactions = Transaction.query.filter_by(user_id=user.id).order_by(Transaction.date.desc(), Transaction.id.desc()).all()
-    for transaction in transactions:
-        if isinstance(transaction.date, str):
-            transaction.date = datetime.strptime(transaction.date, '%Y-%m-%d %H:%M:%S')
+    print(transactions)
     balance = sum(t.amount if t.type == 'รายรับ' else -t.amount for t in transactions)
     return render_template('dashboard.html', transactions=transactions, balance=balance)
 

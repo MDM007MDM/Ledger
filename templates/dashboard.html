@@ -25,7 +25,7 @@
                 {% set running_balance = balance %}
                 {% for transaction in transactions %}
                 <tr>
-                    <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M') if transaction.date else 'ไม่มีข้อมูล' }}</td>
+                    <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M') }}</td>
                     <td>{{ transaction.type }}</td>
                     <td>{{ transaction.amount }} บาท</td>
                     <td>{{ transaction.note }}</td>
